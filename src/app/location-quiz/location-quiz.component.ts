@@ -10,7 +10,6 @@ import { Locations } from 'src/app/model/locations';
 })
 export class LocationQuizComponent implements OnInit, OnDestroy {
   location?: Location;
-  
   welcomeMessageDismissed = false;
   hint1opened = false;
   hint2opened = false;
@@ -19,12 +18,11 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly router: Router) {}
+    private readonly router: Router) { }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
-      const id = params['id'];
-      this.location = Locations.find(t => t.id === id);
+      this.location = Locations.find(t => t.id === params.id);
     });
   }
 

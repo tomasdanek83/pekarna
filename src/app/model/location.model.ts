@@ -1,32 +1,27 @@
-export enum AnswerType {
-    Text,
-    NumberWithTolerance
-}
-
 export interface Location {
     id: string;
-    
+
     name: string;
 
     locationPhotoUrl?: string;
-    
-    coordinates: string;
+
+    coordinates?: string;
 
     showWelcomeMessage?: boolean;
 
-    question: string;
+    question?: string;
 
-    hint1: string;
+    hint1?: string;
 
-    hint2: string;
+    hint2?: string;
 
-    answer: string | number;
+    answer?: string | number;
 
     answerTolerance?: number;
 
-    task: string;
+    task?: string;
 
     taskLinkUrl?: string;
 
     nextLocationId?: string;
-};
+}

@@ -1,7 +1,8 @@
 <div *ngIf="location">
     <mat-card>
         <mat-card-header>
-            <mat-icon mat-card-avatar color="accent">nature_people</mat-icon>
+            <mat-icon mat-card-avatar
+                      color="accent">nature_people</mat-icon>
             <mat-card-title>{{location.name}}</mat-card-title>
             <mat-card-subtitle>Váš úkol</mat-card-subtitle>
         </mat-card-header>
@@ -9,9 +10,11 @@
             <div>{{location.task}}</div>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button color="primary" (click)="onTaskDone()">Úkol splněn</button>
+            <button mat-button
+                    color="primary"
+                    (click)="onTaskDone()">Úkol splněn</button>
         </mat-card-actions>
-    </mat-card>    
+    </mat-card>
 </div>
 
 <div *ngIf="!location">Neplatné id lokality</div>

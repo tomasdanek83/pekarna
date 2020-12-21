@@ -15,12 +15,11 @@ export class LocationTaskComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly router: Router) {}
+    private readonly router: Router) { }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
-      const id = params['id'];
-      this.location = Locations.find(t => t.id === id);
+      this.location = Locations.find(t => t.id === params.id);
     });
   }
 
@@ -29,6 +28,10 @@ export class LocationTaskComponent implements OnInit, OnDestroy {
   }
 
   onTaskDone(): void {
-    this.router.navigate(['/location', this.location?.id, 'navigation']);
+    if (this.location?.nextLocationId) {
+      this.router.navigate(['/location', this.location?.id, 'navigation']);
+    } else {
+      this.router.navigate(['/gameover']);
+    }
   }
 }

@@ -1,14 +1,15 @@
-<div *ngIf="location">
+<div *ngIf="currentLocation">
     <mat-card>
         <mat-card-header>
-            <mat-icon mat-card-avatar color="accent">directions</mat-icon>
-            <mat-card-title>{{location.name}}</mat-card-title>
+            <mat-icon mat-card-avatar
+                      color="accent">directions</mat-icon>
+            <mat-card-title>{{currentLocation.name}}</mat-card-title>
             <mat-card-subtitle>Navigace k dalšímu stanovišti</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <div>{{location.coordinates}}</div>
+            <div>{{nextLocation?.coordinates}}</div>
         </mat-card-content>
-    </mat-card>    
+    </mat-card>
 </div>
 
-<div *ngIf="!location">Neplatné id lokality</div>
+<div *ngIf="!currentLocation">Neplatné id lokality</div>

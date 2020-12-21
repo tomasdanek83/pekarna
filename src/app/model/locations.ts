@@ -2,6 +2,11 @@ import { Location } from './location.model';
 
 export const Locations: Location[] = [
     {
+        id: 'nicota',
+        name: 'Nicota',
+        nextLocationId: 'zeleny-les'
+    },
+    {
         id: 'zeleny-les',
         name: 'Zelený les',
         coordinates: '49.2127617N, 16.5160722E',

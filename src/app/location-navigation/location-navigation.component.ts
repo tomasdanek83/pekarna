@@ -10,18 +10,17 @@ import { Locations } from '../model/locations';
 })
 export class LocationNavigationComponent implements OnInit, OnDestroy {
 
-  location?: Location;
+  currentLocation?: Location;
+  nextLocation?: Location;
   private sub: any;
 
   constructor(
-    private readonly route: ActivatedRoute) {}
+    private readonly route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
-      const id = params['id'];
-      const currentLocation = Locations.find(l => l.id === id);
-
-      this.location = Locations.find(l => l.id === currentLocation?.nextLocationId);
+      this.currentLocation = Locations.find(l => l.id === params.id);
+      this.nextLocation = Locations.find(l => l.id === this.currentLocation?.nextLocationId);
     });
   }
 
