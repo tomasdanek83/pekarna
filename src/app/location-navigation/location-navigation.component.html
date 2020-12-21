@@ -1,0 +1,14 @@
+<div *ngIf="location">
+    <mat-card>
+        <mat-card-header>
+            <mat-icon mat-card-avatar color="accent">directions</mat-icon>
+            <mat-card-title>{{location.name}}</mat-card-title>
+            <mat-card-subtitle>Navigace k dalšímu stanovišti</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div>{{location.coordinates}}</div>
+        </mat-card-content>
+    </mat-card>    
+</div>
+
+<div *ngIf="!location">Neplatné id lokality</div>
