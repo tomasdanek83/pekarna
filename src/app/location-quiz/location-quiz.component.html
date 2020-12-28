@@ -32,6 +32,13 @@
         <mat-card-content>
             <p>{{location.question}}</p>
 
+            <p [formGroup]="form">
+                <mat-form-field appearance="outline">
+                    <mat-label>Vaše odpověď</mat-label>
+                    <input matInput [formControlName]="'answer'" [attr.type]="answerFieldType" required>
+                </mat-form-field>
+            </p>
+
             <mat-expansion-panel (opened)="hint1opened = true">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -52,7 +59,8 @@
         </mat-card-content>
         <mat-card-actions>
             <button mat-button
-                    color="primary">Odeslat odpověď</button>
+                    color="primary"
+                    (click)="onAnswerEntered()">Odeslat odpověď</button>
             <button mat-button
                     (click)="onShowTask()">Zobrazit úkol</button>
         </mat-card-actions>
