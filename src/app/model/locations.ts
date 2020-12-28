@@ -9,6 +9,7 @@ export const Locations: Location[] = [
     {
         id: 'zeleny-les',
         name: 'Zelený les',
+        locationPhotoFilename: 'zeleny-les.jpg',
         coordinates: '49.2127617N, 16.5160722E',
         showWelcomeMessage: true,
         question: 'Lesu, do kterého právě vstupujete, přezdívá moje kamarádka „zelený les“. V létě je tu totiž opravdu zeleno, a to hlavně zásluhou zelených korun stromů a šťavnatého travního porostu pod nimi. Dominují zde dva druhy stromů a podle nich se tento typ lesa také nazývá. Věděli byste, jak? (Máte to trochu těžší, protože teď v zimě mají stromy shozené listí.) Odpověď napište jako přídavné jméno.',
@@ -21,7 +22,7 @@ export const Locations: Location[] = [
     {
         id: 'vrcholy',
         name: 'Pekárna a její vrcholy',
-        locationPhotoUrl: 'vrcholy.jpg',
+        locationPhotoFilename: 'vrcholy.jpg',
         coordinates: '49.2115658N, 16.5136822E',
         question: 'Přírodní památka Pekárna, ve které se nacházíte, se nachází na zalesněných svazích nad údolím Potoka Vrbovce. Svahy tvoří kopec se třemi výraznějšími vrchy. Vy se teď nacházíte na prvním z nich. Odhadněte jeho nadmořskou výšku. Odpověď zapište číslem, tolerance je +/- 10m.',
         hint1: 'Možná Vám pomůže, že údolí Vrbovce, ze kterého jste sem vystoupali, je v nadmořské výšce 250 m n.m.',
@@ -34,7 +35,7 @@ export const Locations: Location[] = [
     {
         id: 'ptaci-zpev',
         name: 'Ptačí zpěv',
-        locationPhotoUrl: 'ptaci-zpev.jpg',
+        locationPhotoFilename: 'ptaci-zpev.jpg',
         coordinates: '49.2100589N, 16.5153667E',
         question: 'Na jaře se tento les rozezní ptačím zpěvem. Jedním z hlasů, které tu můžete zaslechnout, je hlásek elegána v černo-bílém „svatebním“ šatu, o velikosti štíhlejšího vrabce. Sameček tohoto tažného ptáčka je černý svrchu a bílý zespodu, okolo krku má bílý límeček. Hnízdí v dutinách stromů, živí se hmyzem, který chytá za letu. Věděli byste, jak se jmenuje? Napište rodové i druhové jméno.',
         hint1: 'Jeho příbuzným je příslušník stejného rodu, s přízviskem černohlavý. Mezi těmito dvěma ptáčky dochází čas od času k mezidruhovému křížení.',
@@ -47,7 +48,7 @@ export const Locations: Location[] = [
     {
         id: 'jarni-sprint',
         name: 'Jarní sprint',
-        locationPhotoUrl: 'jarni-sprint.jpg',
+        locationPhotoFilename: 'jarni-sprint.jpg',
         coordinates: '49.2127617N, 16.5160722E',
         question: 'Na jaře, ještě než na stromech vyraší listí, bývá země v tomto lese pokrytá sasankami, jaterníky, plicníky… Spěchají, protože potřebují stihnout rozvinout své listy a květy, vytvořit semínka a načerpat vyrobit si cukr do zásoby dříve, než jim listnaté stromy zastíní zdroj světla. Zkuste odhadnout, kolik procent světla dopadá na ze v listnatém lese v době, kdy už jsou listnaté koruny plně rozvinuté (ve srovnání s místem, kde žádný les neroste). Správnou odpověď napište v rozmezí desítky procent (například 90-100).',
         hint1: 'Pomoci by mohla informace, že v zimě, kdy jsou koruny stromů holé, dopadá na zem 50-70% světla.',
@@ -59,7 +60,7 @@ export const Locations: Location[] = [
     {
         id: 'vzacna-kraska',
         name: 'Vzácná kráska',
-        locationPhotoUrl: 'vzacna-kraska.jpg',
+        locationPhotoFilename: 'vzacna-kraska.jpg',
         coordinates: '49.2127617N, 16.5160722E',
         question: 'Jedním z vzácných druhů rostlin, které v Pekárně můžeme najít, je prstnatec bezový. Je to světlomilná rostlina, která roste na suchých, kamenitých, na živiny suchých půdách, na loukách, pastvinách a po okrajích světlých lesů. Kvete v dubnu a v květnu. Vyznačuje se výrazným polymorfismem: jeho květy jsou buď tmavě nachové, nebo světle žluté. Kříženci obou barevných forem pak mají barvu oranžovou. Jde o rostlinu v české přírodě velmi vzácnou. Věděli byste, do které čeledi patří?',
         hint1: 'Latinský název této čeledi zní orchidaceae.',
@@ -72,7 +73,7 @@ export const Locations: Location[] = [
     {
         id: 'zluty-les',
         name: 'Žlutý les',
-        locationPhotoUrl: 'zluty-les.jpg',
+        locationPhotoFilename: 'zluty-les.jpg',
         coordinates: '49.2127617N, 16.5160722E',
         question: 'Zejména na jižním okraji Pekárny najdeme velké množství malých javůrků, které vynikají hlavně na podzim svojí nádhernou žlutou barvou. Zelený les se na chvíli promění ve žlutý les. Zatímco semena některých stromů (dubů nebo buků například) padají přímo pod mateřský strom, a v jeho stínu a za jeho asistence prožívají první roky (no, vlastně spousty let) svého života, semínka jiných stromů (třeba javorů) jsou lehká a snadno cestují – mají třeba „vrtulku“ nebo chmýří. Dětem těchto stromů žít daleko od rodiny nevadí. Věděli byste, jak se správně jmenuje plod javoru?',
         hint1: 'Prozradím, že nese přízvisko křídlatá (podle křidélek či vrtulek, která pak plod odnesou za pomoci větru dál od mateřské rostliny). Tím také napovídám, že název plodu je ženského rodu.',

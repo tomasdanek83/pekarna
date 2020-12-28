@@ -3,7 +3,7 @@ export interface Location {
 
     name: string;
 
-    locationPhotoUrl?: string;
+    locationPhotoFilename?: string;
 
     coordinates?: string;
 

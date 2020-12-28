@@ -14,6 +14,11 @@ export class LocationNavigationComponent implements OnInit, OnDestroy {
   nextLocation?: Location;
   private sub: any;
 
+  get encodedCoords(): string | null {
+    const coords = this.nextLocation?.coordinates;
+    return coords ? encodeURIComponent(coords) : null;
+  }
+
   constructor(
     private readonly route: ActivatedRoute) { }
 
