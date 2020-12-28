@@ -38,6 +38,7 @@
                     <input matInput
                            [formControlName]="'answer'"
                            [attr.type]="answerFieldType"
+                           (focus)="onAnswerFocus()"
                            required>
                 </mat-form-field>
             </p>

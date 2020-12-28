@@ -66,6 +66,10 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
     }
   }
 
+  onAnswerFocus(): void {
+    this.showIncorrectAnswerMessage = false;
+  }
+
   private isAnswerCorrect(answer: string | number): boolean {
     if (this.location?.answerTolerance) {
       return this.isNumericAnswerCorrect(+answer);
