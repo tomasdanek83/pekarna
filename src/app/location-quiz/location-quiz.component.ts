@@ -14,6 +14,11 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
   welcomeMessageDismissed = false;
   hint1opened = false;
   hint2opened = false;
+  showAnswerButton = true;
+  showTaskButton = false;
+  showCorrectAnswerMessage = false;
+  showIncorrectAnswerMessage = false;
+  incorrectAnswerMessage: string | undefined;
 
   form: FormGroup;
   answerControl = new FormControl(null, Validators.required);
@@ -21,17 +26,17 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
   private sub: any;
 
   get answerFieldType(): string {
-    return this.location ? (this.location.answerTolerance ? 'number' : 'string') : ''; 
+    return this.location ? (this.location.answerTolerance ? 'number' : 'string') : '';
   }
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    fb: FormBuilder) { 
-      this.form = fb.group({
-        answer: this.answerControl
-      });
-    }
+    fb: FormBuilder) {
+    this.form = fb.group({
+      answer: this.answerControl
+    });
+  }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
@@ -52,32 +57,54 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
   }
 
   onAnswerEntered(): void {
-    if(this.location?.answerTolerance) {
-      const answer: number = +this.answerControl.value;
-    } else {
-      const answer: string = this.answerControl.value;
+    const answer = this.answerControl.value;
 
-      if(answer?.toLocaleLowerCase() === this.location?.answer) {
-        this.correctAnswer(answer);
-      } else {
-        this.incorrectAnswer(answer);
-      }
+    if (this.isAnswerCorrect(answer)) {
+      this.onCorrectAnswer(answer);
+    } else {
+      this.onIncorrectAnswer(answer);
+    }
+  }
+
+  private isAnswerCorrect(answer: string | number): boolean {
+    if (this.location?.answerTolerance) {
+      return this.isNumericAnswerCorrect(+answer);
+    } else {
+      return this.isTextAnswerCorrect(String(answer));
     }
   }
 
   private isNumericAnswerCorrect(answer: number): boolean {
-    return true;
+    const lower = Number(this.location?.answer) - Number(this.location?.answerTolerance);
+    const upper = Number(this.location?.answer) + Number(this.location?.answerTolerance);
+
+    return answer >= lower && answer <= upper;
   }
 
   private isTextAnswerCorrect(answer: string): boolean {
-    return true;
+    return answer?.trim()?.toLocaleLowerCase() === this.location?.answer;
   }
 
-  private correctAnswer(answer: string | number): void {
+  private onCorrectAnswer(answer: string | number): void {
     console.log('Correct answer: ', answer);
+    this.showIncorrectAnswerMessage = false;
+    this.showCorrectAnswerMessage = true;
+    this.showAnswerButton = false;
+    this.showTaskButton = true;
   }
 
-  private incorrectAnswer(answer: string | number): void {
+  private onIncorrectAnswer(answer: string | number): void {
     console.log('Incorrect answer: ', answer);
+
+    if (this.hint1opened && this.hint2opened) {
+      this.incorrectAnswerMessage = `Nesprávná odpověď. Správná odpověď byla '${this.location?.answer}'. Můžete přejít k úkolu.`;
+      this.showAnswerButton = false;
+      this.showTaskButton = true;
+
+    } else {
+      this.incorrectAnswerMessage = `Nesprávná odpověď '${answer}'. Použijte nápovědu.`;
+    }
+
+    this.showIncorrectAnswerMessage = true;
   }
 }
