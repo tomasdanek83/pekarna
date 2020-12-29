@@ -17,6 +17,7 @@ import { LocationTaskComponent } from './location-task/location-task.component';
 import { LocationNavigationComponent } from './location-navigation/location-navigation.component';
 import { GameOverComponent } from './gameover/gameover.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     GameOverComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

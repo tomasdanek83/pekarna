@@ -45,7 +45,7 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.location = Locations.find(t => t.id === params.id);
 
-      this.loggingService.logEvent(`Quiz entered: ${this.location?.id}`);
+      this.loggingService.logEvent(`Quiz view visited: ${this.location?.id}`);
     });
   }
 

@@ -29,7 +29,7 @@ export class LocationNavigationComponent implements OnInit, OnDestroy {
       this.currentLocation = Locations.find(l => l.id === params.id);
       this.nextLocation = Locations.find(l => l.id === this.currentLocation?.nextLocationId);
 
-      this.loggingService.logEvent(`Navigation entered: ${this.currentLocation?.id}`);
+      this.loggingService.logEvent(`Navigation view visited: ${this.currentLocation?.id}`);
     });
   }
 

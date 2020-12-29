@@ -23,7 +23,7 @@ export class LocationTaskComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.location = Locations.find(t => t.id === params.id);
 
-      this.loggingService.logEvent(`Task entered: ${this.location?.id}`);
+      this.loggingService.logEvent(`Task view visited: ${this.location?.id}`);
     });
   }
 

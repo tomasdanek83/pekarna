@@ -14,7 +14,7 @@ export class HelpComponent implements OnInit {
     private readonly loggingService: LoggingService) { }
 
   ngOnInit(): void {
-    this.loggingService.logEvent('Help entered');
+    this.loggingService.logEvent('Help view visited');
   }
 
   onFirstLocationNavigation(): void {
