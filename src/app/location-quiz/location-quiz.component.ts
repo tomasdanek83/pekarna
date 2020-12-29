@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from 'src/app/model/location.model';
 import { Locations } from 'src/app/model/locations';
+import { LoggingService } from '../logging.service';
 
 @Component({
   selector: 'app-location-quiz',
@@ -33,6 +34,7 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
+    private readonly loggingService: LoggingService,
     fb: FormBuilder) {
     this.form = fb.group({
       answer: this.answerControl
@@ -42,6 +44,8 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
       this.location = Locations.find(t => t.id === params.id);
+
+      this.loggingService.logEvent(`Quiz entered: ${this.location?.id}`);
     });
   }
 
@@ -65,6 +69,8 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
     } else {
       this.onIncorrectAnswer(answer);
     }
+
+    this.loggingService.logEvent(`Answer entered on ${this.location?.id}: '${answer}'`);
   }
 
   onAnswerFocus(): void {

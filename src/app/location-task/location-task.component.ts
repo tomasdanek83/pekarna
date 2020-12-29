@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from 'src/app/model/location.model';
 import { Locations } from '../model/locations';
+import { LoggingService } from '../logging.service';
 
 @Component({
   selector: 'app-location-task',
@@ -15,11 +16,14 @@ export class LocationTaskComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly router: Router) { }
+    private readonly router: Router,
+    private readonly loggingService: LoggingService) { }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
       this.location = Locations.find(t => t.id === params.id);
+
+      this.loggingService.logEvent(`Task entered: ${this.location?.id}`);
     });
   }
 

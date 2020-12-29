@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoggingService } from '../logging.service';
 
 @Component({
   selector: 'app-help',
@@ -8,9 +9,12 @@ import { Router } from '@angular/router';
 })
 export class HelpComponent implements OnInit {
 
-  constructor(private readonly router: Router) { }
+  constructor(
+    private readonly router: Router,
+    private readonly loggingService: LoggingService) { }
 
   ngOnInit(): void {
+    this.loggingService.logEvent('Help entered');
   }
 
   onFirstLocationNavigation(): void {

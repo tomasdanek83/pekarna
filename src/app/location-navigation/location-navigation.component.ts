@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from 'src/app/model/location.model';
+import { LoggingService } from '../logging.service';
 import { Locations } from '../model/locations';
 
 @Component({
@@ -20,12 +21,15 @@ export class LocationNavigationComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private readonly route: ActivatedRoute) { }
+    private readonly route: ActivatedRoute,
+    private readonly loggingService: LoggingService) { }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
       this.currentLocation = Locations.find(l => l.id === params.id);
       this.nextLocation = Locations.find(l => l.id === this.currentLocation?.nextLocationId);
+
+      this.loggingService.logEvent(`Navigation entered: ${this.currentLocation?.id}`);
     });
   }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoggingService } from '../logging.service';
 
 @Component({
   selector: 'app-gameover',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameOverComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly loggingService: LoggingService) { }
 
   ngOnInit(): void {
+    this.loggingService.logEvent('Gameover entered');
   }
-
 }
