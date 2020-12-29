@@ -21,7 +21,11 @@ export interface Location {
 
     task?: string;
 
+    taskLinkTitle?: string;
+
     taskLinkUrl?: string;
+
+    taskOutcome?: string;
 
     nextLocationId?: string;
 }

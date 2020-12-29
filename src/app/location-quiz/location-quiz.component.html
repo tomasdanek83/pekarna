@@ -6,11 +6,14 @@
             <mat-card-title>Vítejte</mat-card-title>
         </mat-card-header>
         <mat-card-content>
+            <p>Vítejte na zimní přírodovědné a rodinně-stmelovací (snad!) hře, kterou jsme pro vás připravili.</p>
             <p>
-                Vítejte na zimní přírodovědné a rodinně-stmelovací (snad!) hře, kterou jsme pro vás připravili.
-                Budete mít za úkol projít celkem 6 stanovišť, na každém z nich načíst QR kód, podle pokynů na webové
-                stránce, na kterou vás kód přivede, zodpovědět soutěžní otázku (využít můžete u každé otázky až 2
-                nápovědy) a bez ohledu na to, jestli ji zodpovíte správně nebo ne, splnit úkol, který vám bude zadán.
+                Budete mít za úkol projít celkem 6 stanovišť. Na každém z nich načtete QR kód, který vás přivede
+                na webovou stránku, kde zodpovíte soutěžní otázku. Využít můžete u každé otázky až 2
+                nápovědy, odpovědi zadávejte s diakritikou, na velikosti písmen nezáleží.
+            </p>
+            <p>
+                Bez ohledu na to, jestli ji zodpovíte správně nebo ne, musíte splnit úkol, který vám bude zadán.
                 Každý z úkolů, prosím, zaznamenejte na mobil (v podobě textu, fotografie, audia či videa, bude vždy
                 upřesněno).
             </p>
@@ -32,34 +35,37 @@
         <mat-card-content>
             <p>{{location.question}}</p>
 
-            <p [formGroup]="form">
-                <mat-form-field appearance="outline">
-                    <mat-label>Vaše odpověď</mat-label>
-                    <input matInput
-                           [formControlName]="'answer'"
-                           [attr.type]="answerFieldType"
-                           (focus)="onAnswerFocus()"
-                           required>
-                </mat-form-field>
-            </p>
+            <ng-container *ngIf="showFieldAndHints">
+                <p [formGroup]="form">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Vaše odpověď</mat-label>
+                        <input matInput
+                               [formControlName]="'answer'"
+                               [attr.type]="answerFieldType"
+                               (focus)="onAnswerFocus()"
+                               autocomplete="off"
+                               required>
+                    </mat-form-field>
+                </p>
 
-            <mat-expansion-panel (opened)="hint1opened = true">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Nápověda 1
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <p>{{location.hint1}}</p>
-            </mat-expansion-panel>
+                <mat-expansion-panel (opened)="hint1opened = true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Nápověda 1
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>{{location.hint1}}</p>
+                </mat-expansion-panel>
 
-            <mat-expansion-panel (opened)="hint2opened = true">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Nápověda 2
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <p>{{location.hint2}}</p>
-            </mat-expansion-panel>
+                <mat-expansion-panel (opened)="hint2opened = true">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Nápověda 2
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>{{location.hint2}}</p>
+                </mat-expansion-panel>
+            </ng-container>
 
             <div *ngIf="showCorrectAnswerMessage"
                  class="correct-answer">

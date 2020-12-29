@@ -12,6 +12,7 @@ import { Locations } from 'src/app/model/locations';
 export class LocationQuizComponent implements OnInit, OnDestroy {
   location?: Location;
   welcomeMessageDismissed = false;
+  showFieldAndHints = true;
   hint1opened = false;
   hint2opened = false;
   showAnswerButton = true;
@@ -86,11 +87,12 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
   }
 
   private isTextAnswerCorrect(answer: string): boolean {
-    return answer?.trim()?.toLocaleLowerCase() === this.location?.answer;
+    return answer?.trim()?.toLocaleLowerCase() === String(this.location?.answer)?.toLocaleLowerCase();
   }
 
   private onCorrectAnswer(answer: string | number): void {
     console.log('Correct answer: ', answer);
+    this.showFieldAndHints = false;
     this.showIncorrectAnswerMessage = false;
     this.showCorrectAnswerMessage = true;
     this.showAnswerButton = false;
@@ -101,6 +103,7 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
     console.log('Incorrect answer: ', answer);
 
     if (this.hint1opened && this.hint2opened) {
+      this.showFieldAndHints = false;
       this.incorrectAnswerMessage = `Nesprávná odpověď. Správná odpověď byla '${this.location?.answer}'. Můžete přejít k úkolu.`;
       this.showAnswerButton = false;
       this.showTaskButton = true;
