@@ -1,6 +1,8 @@
 export interface Location {
     id: string;
 
+    index: number;
+
     name: string;
 
     locationPhotoFilename?: string;
@@ -15,7 +17,7 @@ export interface Location {
 
     hint2?: string;
 
-    answer?: string | number;
+    answer?: string[] | number;
 
     answerTolerance?: number;
 

@@ -12,12 +12,16 @@ import { LoggingService } from '../logging.service';
 export class LocationTaskComponent implements OnInit, OnDestroy {
 
   location?: Location;
+  totalLocations: number;
+
   private sub: any;
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly loggingService: LoggingService) { }
+    private readonly loggingService: LoggingService) {
+    this.totalLocations = Locations.filter(l => Boolean(l.question)).length;
+  }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {

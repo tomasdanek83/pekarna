@@ -13,6 +13,7 @@ export class LocationNavigationComponent implements OnInit, OnDestroy {
 
   currentLocation?: Location;
   nextLocation?: Location;
+  totalLocations: number;
   private sub: any;
 
   get encodedCoords(): string | null {
@@ -22,7 +23,9 @@ export class LocationNavigationComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly loggingService: LoggingService) { }
+    private readonly loggingService: LoggingService) {
+    this.totalLocations = Locations.filter(l => Boolean(l.question)).length;
+  }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {

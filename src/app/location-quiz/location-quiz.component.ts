@@ -21,6 +21,7 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
   showCorrectAnswerMessage = false;
   showIncorrectAnswerMessage = false;
   incorrectAnswerMessage: string | undefined;
+  totalLocations: number;
 
   form: FormGroup;
   answerControl = new FormControl(null, Validators.required);
@@ -39,6 +40,8 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
     this.form = fb.group({
       answer: this.answerControl
     });
+
+    this.totalLocations = Locations.filter(l => Boolean(l.question)).length;
   }
 
   ngOnInit(): void {
@@ -70,7 +73,7 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
       this.onIncorrectAnswer(answer);
     }
 
-    this.loggingService.logEvent(`Answer entered on ${this.location?.id}: '${answer}'`);
+    this.loggingService.logEvent(`Answer entered on ${this.location?.id}: '${answer}', hints: [${this.hint1opened}, ${this.hint2opened}]`);
   }
 
   onAnswerFocus(): void {
@@ -93,7 +96,9 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
   }
 
   private isTextAnswerCorrect(answer: string): boolean {
-    return answer?.trim()?.toLocaleLowerCase() === String(this.location?.answer)?.toLocaleLowerCase();
+    const trimmedLowercaseAnswer = answer.trim()?.toLocaleLowerCase();
+
+    return (this.location?.answer as string[]).some(a => a === trimmedLowercaseAnswer);
   }
 
   private onCorrectAnswer(answer: string | number): void {

@@ -7,21 +7,26 @@
         </mat-card-header>
         <mat-card-content>
             <p>
-                Vítejte na zimní přírodovědné a rodinně-stmelovací (snad!) hře, kterou jsme pro vás připravili.
+                Vítejte na zimní přírodovědné a rodinně-stmelovací hře, kterou jsme pro vás připravili.
             </p>
             <p>
-                Budete mít za úkol projít celkem 6 stanovišť. Na každém z nich načtete QR kód, který vás přivede
-                na webovou stránku, kde zodpovíte soutěžní otázku. Využít můžete u každé otázky až 2
+                Budete mít za úkol projít celkem {{totalLocations}} stanovišť. Na každém z nich načtete QR kód, který
+                vás přivede na webovou stránku, kde zodpovíte soutěžní otázku. Využít můžete u každé otázky až 2
                 nápovědy, odpovědi zadávejte s diakritikou, na velikosti písmen nezáleží.
             </p>
             <p>
                 Bez ohledu na to, jestli ji zodpovíte správně nebo ne, musíte splnit úkol, který vám bude zadán.
                 Každý z úkolů, prosím, zaznamenejte na mobil (v podobě textu, fotografie, audia či videa, bude vždy
-                upřesněno).
+                upřesněno). Výstupy úkolů budete odevzdávat až na konci hry (klidně až z domova).
             </p>
             <p>
-                Nacházíte se na chráněném území, pohybujte se prosím jen po cestách. Za větrného počasí hrozí nebezpečí
-                pádu stromů, buďte opatrní.
+                V zimě se telefony při zapnutém GPS rychle vybíjí, doporučujeme tedy GPS vypínat, pokud zrovna nehledáte
+                další stanoviště.
+            </p>
+            <p>
+                Nacházíte se na chráněném území, pohybujte se prosím jen po cestách.
+                V lese hrozí nebezpečí pádu stromů, dávejte si pozor na podezřelé stromy a nevyrážejte za větrného
+                počasí.
             </p>
         </mat-card-content>
         <mat-card-actions>
@@ -35,7 +40,7 @@
         <mat-card-header>
             <mat-icon mat-card-avatar
                       color="accent">school</mat-icon>
-            <mat-card-title>{{location.name}}</mat-card-title>
+            <mat-card-title>{{location.name}} ({{location.index}}/{{totalLocations}})</mat-card-title>
             <mat-card-subtitle>Otázka</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
