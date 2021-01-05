@@ -17,15 +17,13 @@ switch($_SERVER['REQUEST_METHOD']){
         $locationId = $params->locationId;
         $view = $params->view;
         $event = $params->event;
-        $details = utf8_decode($params->details);
+        $details = $params->details;
         $userAgent = $params->userAgent;
 
         $servername = "wm136.wedos.net";
         $dbname = "d22429_pekarna";
         $username = "w22429_pekarna";
         $password = "gMJEv6rF";
-
-        echo $details;
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -34,6 +32,10 @@ switch($_SERVER['REQUEST_METHOD']){
         if ($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
         }
+
+        if (!$conn->set_charset('utf8')) {
+          printf("Error loading character set utf8: %s\n", $conn->error);
+        }        
 
         $sql = "INSERT INTO eventlog (SESSION_ID, LOCATION_ID, VIEW, EVENT, DETAILS, USER_AGENT)
         VALUES ('$sessionId', '$locationId', '$view', '$event', '$details', '$userAgent')";

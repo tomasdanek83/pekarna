@@ -52,8 +52,8 @@ export class LoggingService {
     const eventLog: EventLog = {
       sessionId: this.sessionId,
       locationId: this.locationService.location?.id ?? 'unknown',
-      view: view,
-      event: event,
+      view,
+      event,
       details: details ?? null,
       userAgent: this.deviceService.getDeviceInfo().userAgent
     };
@@ -70,7 +70,7 @@ export class LoggingService {
   }
 
   private addEventLog(eventLog: EventLog): void {
-    const endpoint = 'http://pekarna.dankovi.org/addlogevent.php';
+    const endpoint = 'http://pekarna.dankovi.org/api/addlogevent.php';
 
     this.http.post(endpoint, eventLog)
       .subscribe(
@@ -79,16 +79,16 @@ export class LoggingService {
       );
   }
 
-  private sendEmail(eventLog: EventLog) {
+  private sendEmail(eventLog: EventLog): void {
     const message = `<p>SessionId: ${eventLog.sessionId}</p>` +
       `<p>${new Date().toLocaleString('cs-CZ')}</p>` +
       `<p>${JSON.stringify(this.deviceService.getDeviceInfo())}</p>`;
 
-    let postVars = {
-      message: message
+    const postVars = {
+      message
     };
 
-    const endpoint = 'http://pekarna.dankovi.org/sendmail.php';
+    const endpoint = 'http://pekarna.dankovi.org/api/sendmail.php';
 
     this.http.post(endpoint, postVars)
       .subscribe(
