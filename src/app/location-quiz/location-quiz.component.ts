@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Location } from 'src/app/model/location.model';
-import { Locations } from 'src/app/model/locations';
+import { LocationService } from '../location.service';
 import { LoggingService } from '../logging.service';
 
 @Component({
@@ -10,9 +10,8 @@ import { LoggingService } from '../logging.service';
   templateUrl: './location-quiz.component.html',
   styleUrls: ['./location-quiz.component.scss']
 })
-export class LocationQuizComponent implements OnInit, OnDestroy {
+export class LocationQuizComponent implements OnInit {
   location?: Location;
-  welcomeMessageDismissed = false;
   showFieldAndHints = true;
   hint1opened = false;
   hint2opened = false;
@@ -21,47 +20,32 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
   showCorrectAnswerMessage = false;
   showIncorrectAnswerMessage = false;
   incorrectAnswerMessage: string | undefined;
-  totalLocations: number;
 
   form: FormGroup;
   answerControl = new FormControl(null, Validators.required);
-
-  private sub: any;
 
   get answerFieldType(): string {
     return this.location ? (this.location.answerTolerance ? 'number' : 'string') : '';
   }
 
   constructor(
-    private readonly route: ActivatedRoute,
     private readonly router: Router,
+    private readonly locationService: LocationService,
     private readonly loggingService: LoggingService,
     fb: FormBuilder) {
     this.form = fb.group({
       answer: this.answerControl
     });
-
-    this.totalLocations = Locations.filter(l => Boolean(l.question)).length;
   }
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
-      this.location = Locations.find(t => t.id === params.id);
+    this.location = this.locationService.location;
 
-      this.loggingService.logEvent(`Quiz view visited: ${this.location?.id}`);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
-
-  onWelcomeMessageDismiss(): void {
-    this.welcomeMessageDismissed = true;
+    this.loggingService.logEvent('Quiz', 'ViewEntered');
   }
 
   onShowTask(): void {
-    this.router.navigate(['/location', this.location?.id, 'task']);
+    this.router.navigate(['/task']);
   }
 
   onAnswerEntered(): void {
@@ -73,7 +57,7 @@ export class LocationQuizComponent implements OnInit, OnDestroy {
       this.onIncorrectAnswer(answer);
     }
 
-    this.loggingService.logEvent(`Answer entered on ${this.location?.id}: '${answer}', hints: [${this.hint1opened}, ${this.hint2opened}]`);
+    this.loggingService.logEvent('Quiz', 'AnswerEntered', `'${answer}', hints: [${this.hint1opened}, ${this.hint2opened}]`);
   }
 
   onAnswerFocus(): void {

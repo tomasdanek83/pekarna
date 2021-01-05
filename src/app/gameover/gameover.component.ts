@@ -11,6 +11,6 @@ export class GameOverComponent implements OnInit {
   constructor(private readonly loggingService: LoggingService) { }
 
   ngOnInit(): void {
-    this.loggingService.logEvent('Gameover view visited');
+    this.loggingService.logEvent('Gameover', 'ViewEntered');
   }
 }

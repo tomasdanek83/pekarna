@@ -1,26 +1,26 @@
 <div *ngIf="location">
-    <mat-card>
-        <mat-card-header>
-            <mat-icon mat-card-avatar
-                      color="accent">nature_people</mat-icon>
-            <mat-card-title>{{location.name}} ({{location.index}}/{{totalLocations}})</mat-card-title>
-            <mat-card-subtitle>Váš úkol</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p>{{location.task}}</p>
-            <p *ngIf="location.taskLinkUrl">
-                <a href="{{location.taskLinkUrl}}">{{location.taskLinkTitle}}</a>
-            </p>
-            <p *ngIf="location.taskOutcome">
-                <strong>Váš výstup:</strong> {{location.taskOutcome}}
-            </p>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-button
-                    color="primary"
-                    (click)="onTaskDone()">Kudy k dalšímu stanovišti?</button>
-        </mat-card-actions>
-    </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-icon mat-card-avatar
+                color="accent">nature_people</mat-icon>
+      <mat-card-title>Váš úkol</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{location.task}}</p>
+      <p *ngIf="location.taskLinkUrl">
+        <a href="{{location.taskLinkUrl}}">{{location.taskLinkTitle}}</a>
+      </p>
+      <p *ngIf="location.taskOutcome">
+        <strong>Váš výstup:</strong> {{location.taskOutcome}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button
+              color="primary"
+              (click)="onTaskDone()">Kudy k dalšímu stanovišti?</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
 
 <div *ngIf="!location">Neplatné id lokality</div>

@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Location } from 'src/app/model/location.model';
-import { Locations } from '../model/locations';
+import { LocationService } from '../location.service';
 import { LoggingService } from '../logging.service';
 
 @Component({
@@ -9,35 +9,25 @@ import { LoggingService } from '../logging.service';
   templateUrl: './location-task.component.html',
   styleUrls: ['./location-task.component.scss']
 })
-export class LocationTaskComponent implements OnInit, OnDestroy {
+export class LocationTaskComponent implements OnInit {
 
   location?: Location;
-  totalLocations: number;
-
-  private sub: any;
 
   constructor(
-    private readonly route: ActivatedRoute,
     private readonly router: Router,
+    private readonly locationService: LocationService,
     private readonly loggingService: LoggingService) {
-    this.totalLocations = Locations.filter(l => Boolean(l.question)).length;
   }
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
-      this.location = Locations.find(t => t.id === params.id);
+    this.location = this.locationService.location;
 
-      this.loggingService.logEvent(`Task view visited: ${this.location?.id}`);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.loggingService.logEvent('Task', 'ViewEntered');
   }
 
   onTaskDone(): void {
     if (this.location?.nextLocationId) {
-      this.router.navigate(['/location', this.location?.id, 'navigation']);
+      this.router.navigate(['/nav-next']);
     } else {
       this.router.navigate(['/gameover']);
     }

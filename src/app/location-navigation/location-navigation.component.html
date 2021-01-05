@@ -1,28 +1,27 @@
-<div *ngIf="currentLocation">
-    <mat-card>
-        <mat-card-header>
-            <mat-icon mat-card-avatar
-                      color="accent">directions</mat-icon>
-            <mat-card-title>{{currentLocation?.name}} ({{currentLocation?.index}}/{{totalLocations}})</mat-card-title>
-            <mat-card-subtitle>Navigace k dalšímu stanovišti</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p>
-                <mat-form-field appearance="outline">
-                    <mat-label>Souřadnice</mat-label>
-                    <input matInput
-                           [value]="nextLocation?.coordinates"
-                           readonly>
-                </mat-form-field>
-            </p>
-            <p><a href="http://www.mapy.cz?q={{encodedCoords}}">Zobrazit na Mapy.cz</a>
-            <p>
-                <a href="/assets/img/{{nextLocation?.locationPhotoFilename}}"
-                   target="_blank">
-                    <img src="/assets/img/{{nextLocation?.locationPhotoFilename}}">
-                </a>
-        </mat-card-content>
-    </mat-card>
+<div *ngIf="nextLocation">
+  <mat-card>
+    <mat-card-header>
+      <mat-icon mat-card-avatar
+                color="accent">directions</mat-icon>
+      <mat-card-title>Další stanoviště</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Souřadnice</mat-label>
+          <input matInput
+                 [value]="nextLocation?.coordinates"
+                 readonly>
+        </mat-form-field>
+      </p>
+      <p><a href="http://www.mapy.cz?q={{encodedCoords}}">Zobrazit na Mapy.cz</a>
+      <p>
+        <a href="/assets/img/{{nextLocation?.locationPhotoFilename}}"
+           target="_blank">
+          <img src="/assets/img/{{nextLocation?.locationPhotoFilename}}">
+        </a>
+    </mat-card-content>
+  </mat-card>
 </div>
 
-<div *ngIf="!currentLocation">Neplatné id lokality</div>
+<div *ngIf="!nextLocation">Neplatné id lokality</div>

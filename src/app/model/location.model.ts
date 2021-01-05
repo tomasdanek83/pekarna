@@ -1,33 +1,33 @@
 export interface Location {
-    id: string;
+  id: string;
 
-    index: number;
+  index: number;
 
-    name: string;
+  name: string;
 
-    locationPhotoFilename?: string;
+  locationPhotoFilename: string;
 
-    coordinates?: string;
+  coordinates: string;
 
-    showWelcomeMessage?: boolean;
+  showWelcomeMessage?: boolean;
 
-    question?: string;
+  question: string;
 
-    hint1?: string;
+  hint1: string;
 
-    hint2?: string;
+  hint2: string;
 
-    answer?: string[] | number;
+  answer: string[] | number;
 
-    answerTolerance?: number;
+  answerTolerance?: number;
 
-    task?: string;
+  task: string;
 
-    taskLinkTitle?: string;
+  taskLinkTitle?: string;
 
-    taskLinkUrl?: string;
+  taskLinkUrl?: string;
 
-    taskOutcome?: string;
+  taskOutcome: string;
 
-    nextLocationId?: string;
+  nextLocationId?: string;
 }

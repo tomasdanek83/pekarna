@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocationService } from '../location.service';
 import { LoggingService } from '../logging.service';
+import { Location } from '../model/location.model';
 import { Locations } from '../model/locations';
 
 @Component({
@@ -11,18 +13,25 @@ import { Locations } from '../model/locations';
 export class HelpComponent implements OnInit {
 
   totalLocations: number;
+  location: Location | undefined;
 
   constructor(
     private readonly router: Router,
+    private readonly locationService: LocationService,
     private readonly loggingService: LoggingService) {
     this.totalLocations = Locations.filter(l => Boolean(l.question)).length;
   }
 
   ngOnInit(): void {
-    this.loggingService.logEvent('Help view visited');
+    this.location = this.locationService.location;
+    this.loggingService.logEvent('Help', 'ViewEntered');
   }
 
   onFirstLocationNavigation(): void {
-    this.router.navigate(['/location', 'nicota', 'navigation']);
+    this.router.navigate(['/nav-first']);
+  }
+
+  onShowWelcome(): void {
+    this.router.navigate(['/welcome']);
   }
 }

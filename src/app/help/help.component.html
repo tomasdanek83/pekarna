@@ -1,22 +1,29 @@
 <mat-card>
-    <mat-card-header>
-        <mat-icon mat-card-avatar
-                  color="accent">help</mat-icon>
-        <mat-card-title>O aplikaci</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <p>Vítejte, objevili jste jedno ze {{totalLocations}} stanovišť naší lesní hry.</p>
-        <p>Pokud si chcete zahrát, musíte přejít na první stanoviště nyní nebo z posledního stanoviště.</p>
-        <p>Hra vám zabere 1,5 - 2 hodiny. Nejvíc si ji
-            užijete ve 3 a více lidech.</p>
-        <p>Ke hře je potřeba nabitý chytrý telefon s přístupem k internetu a GPS.</p>
-        <p>Pokud najdete nějakou nesrovnalost, např. nefunkční QR kódy nebo chybějící stanoviště, napište prosím na <a
-               href="mailto:tomasdanek83@gmail.com">tomasdanek83@gmail.com</a></p>
-        <p>Lenka a Tomáš Daňkovi</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button
-                color="primary"
-                (click)="onFirstLocationNavigation()">Přejít na první stanoviště</button>
-    </mat-card-actions>
+  <mat-card-header>
+    <mat-icon mat-card-avatar
+              color="accent">help</mat-icon>
+    <mat-card-title>Pekárna žije!</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Vítejte, objevili jste jedno ze {{totalLocations}} stanovišť naší lesní hry.</p>
+    <p>Pokud si chcete zahrát, máte nyní 2 možnosti:</p>
+    <ul>
+      <li>Začít na tomto stanovišti ({{location?.name}}), které je {{location?.index}}. ze {{totalLocations}} a poté přejít z
+        posledního stanoviště na první (je to kousek) a hru dokončit</li>
+      <li>Přejít na první stanoviště a hrát od začátku</li>
+    </ul>
+    <p>Hra vám zabere 1,5 - 2 hodiny. Nejvíc si ji
+      užijete ve 3 a více lidech.</p>
+    <p>Ke hře je potřeba nabitý chytrý telefon s přístupem k internetu a GPS.</p>
+    <p>Pokud najdete nějakou nesrovnalost, např. nefunkční QR kódy nebo chybějící stanoviště, napište prosím na <a
+         href="mailto:tomasdanek83@gmail.com">tomasdanek83@gmail.com</a></p>
+    <p>Lenka a Tomáš Daňkovi</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button
+            color="primary"
+            (click)="onFirstLocationNavigation()">Přejít na první stanoviště</button>
+    <button mat-button
+            (click)="onShowWelcome()">Úvodní pokyny</button>
+  </mat-card-actions>
 </mat-card>

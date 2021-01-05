@@ -18,6 +18,7 @@ import { LocationNavigationComponent } from './location-navigation/location-navi
 import { GameOverComponent } from './gameover/gameover.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     HelpComponent,
     LocationTaskComponent,
     LocationNavigationComponent,
-    GameOverComponent
+    GameOverComponent,
+    WelcomeComponent
   ],
   imports: [
     HttpClientModule,

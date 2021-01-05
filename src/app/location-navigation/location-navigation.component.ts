@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from 'src/app/model/location.model';
+import { LocationService } from '../location.service';
 import { LoggingService } from '../logging.service';
 import { Locations } from '../model/locations';
 
@@ -9,12 +10,9 @@ import { Locations } from '../model/locations';
   templateUrl: './location-navigation.component.html',
   styleUrls: ['./location-navigation.component.scss']
 })
-export class LocationNavigationComponent implements OnInit, OnDestroy {
+export class LocationNavigationComponent implements OnInit {
 
-  currentLocation?: Location;
   nextLocation?: Location;
-  totalLocations: number;
-  private sub: any;
 
   get encodedCoords(): string | null {
     const coords = this.nextLocation?.coordinates;
@@ -22,21 +20,17 @@ export class LocationNavigationComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private readonly route: ActivatedRoute,
-    private readonly loggingService: LoggingService) {
-    this.totalLocations = Locations.filter(l => Boolean(l.question)).length;
+    private readonly locationService: LocationService,
+    private readonly loggingService: LoggingService,
+    route: ActivatedRoute,) {
+    if (route.snapshot.data.toFirst) {
+      this.nextLocation = this.locationService.getFirstLocation();
+    } else {
+      this.nextLocation = Locations.find(l => l.id === this.locationService?.location?.nextLocationId);
+    }
   }
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
-      this.currentLocation = Locations.find(l => l.id === params.id);
-      this.nextLocation = Locations.find(l => l.id === this.currentLocation?.nextLocationId);
-
-      this.loggingService.logEvent(`Navigation view visited: ${this.currentLocation?.id}`);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.loggingService.logEvent('Navigation', 'ViewEntered', `NextLocation: ${this.nextLocation?.id}`);
   }
 }

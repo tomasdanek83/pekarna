@@ -1,13 +1,19 @@
 <p>
   <mat-toolbar color="primary">
-    <span>Pekárna žije!</span>
+    <span *ngIf="(location$ | async) as location">{{location.name}} ({{location.index}}/{{totalLocations}})</span>
     <span class="toolbar-spacer"></span>
-    <button mat-icon-button (click)="onHelpClick()">
+    <button mat-icon-button
+            (click)="onHelpClick()">
       <mat-icon>help</mat-icon>
-    </button>    
+    </button>
   </mat-toolbar>
 </p>
 
 <div class="content">
   <router-outlet></router-outlet>
+
+  <div *ngIf="(location$ | async) as location"
+       class="location">
+    Pekárna žije! - <a [routerLink]="['/quiz']">Stanoviště {{location.name}}</a>
+  </div>
 </div>
