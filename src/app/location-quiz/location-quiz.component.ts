@@ -57,7 +57,7 @@ export class LocationQuizComponent implements OnInit {
       this.onIncorrectAnswer(answer);
     }
 
-    this.loggingService.logEvent('Quiz', 'AnswerEntered', `'${answer}', hints: [${this.hint1opened}, ${this.hint2opened}]`);
+    this.loggingService.logEvent('Quiz', 'AnswerEntered', `"${answer}", hints: [${this.hint1opened}, ${this.hint2opened}]`);
   }
 
   onAnswerFocus(): void {

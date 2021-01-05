@@ -38,8 +38,6 @@ export class AppComponent implements OnInit, OnDestroy {
         if (location) {
           this.locationService.setLocation(location);
 
-          this.loggingService.logEvent('Root', 'LocationEntered');
-
           if (location.showWelcomeMessage && !this.locationService.getWelcomeDisplayed()) {
             this.router.navigate(['/welcome']);
             this.locationService.setWelcomeDisplayed();
