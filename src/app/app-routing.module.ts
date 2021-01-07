@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EventsComponent } from './eventlog/events/events.component';
 import { GameOverComponent } from './gameover/gameover.component';
 import { HelpComponent } from './help/help.component';
 import { LocationNavigationComponent } from './location-navigation/location-navigation.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'nav-next', component: LocationNavigationComponent },
   { path: 'nav-first', component: LocationNavigationComponent, data: { toFirst: true } },
   { path: 'gameover', component: GameOverComponent },
+  { path: 'events/:sessionId', component: EventsComponent },
   { path: '', component: HelpComponent }
 ];
 

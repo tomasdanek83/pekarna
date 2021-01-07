@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,7 @@ import { LocationNavigationComponent } from './location-navigation/location-navi
 import { LocationQuizComponent } from './location-quiz/location-quiz.component';
 import { LocationTaskComponent } from './location-task/location-task.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { EventsComponent } from './eventlog/events/events.component';
 
 
 
@@ -30,7 +31,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     LocationTaskComponent,
     LocationNavigationComponent,
     GameOverComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    EventsComponent
   ],
   imports: [
     HttpClientModule,
@@ -46,7 +48,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

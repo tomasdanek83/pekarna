@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LocationService } from './location.service';
-import { LoggingService } from './logging.service';
 import { Location } from './model/location.model';
 import { Locations } from './model/locations';
 
@@ -13,18 +13,20 @@ import { Locations } from './model/locations';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'Pekárna žije!';
 
   location$: Observable<Location | undefined>;
   totalLocations: number;
 
   private sub: any;
 
+  private titleSubject = new BehaviorSubject<string | undefined>(undefined);
+  title$ = this.titleSubject.asObservable();
+
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly locationService: LocationService,
-    private readonly loggingService: LoggingService) {
+    private readonly titleService: Title) {
     this.location$ = this.locationService.location$;
     this.totalLocations = this.locationService.totalLocations;
   }
@@ -38,6 +40,9 @@ export class AppComponent implements OnInit, OnDestroy {
         if (location) {
           this.locationService.setLocation(location);
 
+          this.titleSubject.next(this.getLocationTitle(location));
+          this.titleService.setTitle(`${this.getLocationTitle(location)} - Pekárna žije!`);
+
           if (location.showWelcomeMessage && !this.locationService.getWelcomeDisplayed()) {
             this.router.navigate(['/welcome']);
             this.locationService.setWelcomeDisplayed();
@@ -45,8 +50,16 @@ export class AppComponent implements OnInit, OnDestroy {
             this.router.navigate(['/quiz']);
           }
         }
+      } else if (queryParams["sessionId"]) {
+        this.titleSubject.next('Moje cesta');
+        this.titleService.setTitle('Moje cesta - Pekárna žije!');
+        this.router.navigate(['/events', queryParams["sessionId"]]);
       }
     });
+  }
+
+  getLocationTitle(location: Location): string {
+    return `${location.name} (${location.index}/${this.totalLocations})`;
   }
 
   onHelpClick(): void {

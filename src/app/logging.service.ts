@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 import { LocationService } from './location.service';
@@ -17,6 +18,8 @@ export interface EventLog {
   details: string | null;
   userAgent: string;
 }
+
+const endpointBaseUrl = 'http://pekarna.dankovi.org/api';
 
 @Injectable({
   providedIn: 'root'
@@ -69,8 +72,12 @@ export class LoggingService {
     }
   }
 
+  getEvents(sessionId: string): Observable<EventLog[]> {
+    return this.http.get<EventLog[]>(`${endpointBaseUrl}/getevents?sessionId=${sessionId}`);
+  }
+
   private addEventLog(eventLog: EventLog): void {
-    const endpoint = 'http://pekarna.dankovi.org/api/addlogevent.php';
+    const endpoint = `${endpointBaseUrl}/addlogevent.php`;
 
     this.http.post(endpoint, eventLog)
       .subscribe(
@@ -80,15 +87,18 @@ export class LoggingService {
   }
 
   private sendEmail(eventLog: EventLog): void {
+    const eventsUrl = `http://pekarna.dankovi.org/?sessionId=${eventLog.sessionId}`;
+
     const message = `<p>SessionId: ${eventLog.sessionId}</p>` +
       `<p>${new Date().toLocaleString('cs-CZ')}</p>` +
+      `<p><a href="${eventsUrl}">${eventsUrl}</p>` +
       `<p>${JSON.stringify(this.deviceService.getDeviceInfo())}</p>`;
 
     const postVars = {
       message
     };
 
-    const endpoint = 'http://pekarna.dankovi.org/api/sendmail.php';
+    const endpoint = `${endpointBaseUrl}/sendmail.php`;
 
     this.http.post(endpoint, postVars)
       .subscribe(
