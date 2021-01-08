@@ -3,22 +3,13 @@
 switch($_SERVER['REQUEST_METHOD']){
     case("OPTIONS"): //Allow preflighting to take place.
         header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: POST");
+        header("Access-Control-Allow-Methods: GET");
         header("Access-Control-Allow-Headers: content-type");
         exit;
-    case("POST"): //Post data;
+    case("GET"): //Post data;
         header("Access-Control-Allow-Origin: *");
 
-        $json = file_get_contents('php://input');
-
-        $params = json_decode($json);
-
-        $sessionId = $params->SESSION_ID;
-        $locationId = $params->LOCATION_ID;
-        $view = $params->VIEW;
-        $event = $params->EVENT;
-        $details = $params->DETAILS;
-        $userAgent = $params->USER_AGENT;
+        $sessionId = $_GET["sessionId"];
 
         $servername = "wm136.wedos.net";
         $dbname = "d22429_pekarna";
@@ -37,20 +28,21 @@ switch($_SERVER['REQUEST_METHOD']){
           printf("Error loading character set utf8: %s\n", $conn->error);
         }        
 
-        $sql = "INSERT INTO eventlog (SESSION_ID, LOCATION_ID, VIEW, EVENT, DETAILS, USER_AGENT)
-        VALUES ('$sessionId', '$locationId', '$view', '$event', '$details', '$userAgent')";
+        $sql = "SELECT * FROM eventlog WHERE SESSION_ID='$sessionId' ORDER BY TIMESTAMP DESC";
+        $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($conn));        
 
-        if ($conn->query($sql) === TRUE) {
-          echo "New record created successfully";
-        } else {
-          echo "Error: " . $sql . "<br>" . $conn->error;
+        $resultArray = array();
+        while($row =mysqli_fetch_assoc($result))
+        {
+            $resultArray[] = $row;
         }
+        echo json_encode($resultArray);
 
         $conn->close();
 
         break;
-    default: //Reject any non POST or OPTIONS requests.
-        header("Allow: POST", true, 405);
+    default: //Reject any non GET or OPTIONS requests.
+        header("Allow: GET", true, 405);
         exit;
 }
 

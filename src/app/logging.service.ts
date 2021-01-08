@@ -6,18 +6,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 import { LocationService } from './location.service';
-
-export type LogEvent = 'ViewEntered' | 'SessionCreated' | 'AnswerEntered';
-
-export type LogView = 'App' | 'Help' | 'Welcome' | 'Quiz' | 'Task' | 'Navigation' | 'Gameover';
-export interface EventLog {
-  sessionId: string;
-  locationId: string;
-  view: LogView;
-  event: LogEvent;
-  details: string | null;
-  userAgent: string;
-}
+import { EventLog, LogEvent, LogView } from './model/eventlog.model';
 
 const endpointBaseUrl = 'http://pekarna.dankovi.org/api';
 
@@ -53,12 +42,12 @@ export class LoggingService {
   logEvent(view: LogView, event: LogEvent, details?: string): void {
 
     const eventLog: EventLog = {
-      sessionId: this.sessionId,
-      locationId: this.locationService.location?.id ?? 'unknown',
-      view,
-      event,
-      details: details ?? null,
-      userAgent: this.deviceService.getDeviceInfo().userAgent
+      SESSION_ID: this.sessionId,
+      LOCATION_ID: this.locationService.location?.id ?? 'unknown',
+      VIEW: view,
+      EVENT: event,
+      DETAILS: details ?? null,
+      USER_AGENT: this.deviceService.getDeviceInfo().userAgent
     };
 
     console.log('eventLog: ', eventLog);
@@ -73,7 +62,7 @@ export class LoggingService {
   }
 
   getEvents(sessionId: string): Observable<EventLog[]> {
-    return this.http.get<EventLog[]>(`${endpointBaseUrl}/getevents?sessionId=${sessionId}`);
+    return this.http.get<EventLog[]>(`${endpointBaseUrl}/getlogevents.php?sessionId=${sessionId}`);
   }
 
   private addEventLog(eventLog: EventLog): void {
@@ -87,9 +76,9 @@ export class LoggingService {
   }
 
   private sendEmail(eventLog: EventLog): void {
-    const eventsUrl = `http://pekarna.dankovi.org/?sessionId=${eventLog.sessionId}`;
+    const eventsUrl = `http://pekarna.dankovi.org/?sessionId=${eventLog.SESSION_ID}`;
 
-    const message = `<p>SessionId: ${eventLog.sessionId}</p>` +
+    const message = `<p>SessionId: ${eventLog.SESSION_ID}</p>` +
       `<p>${new Date().toLocaleString('cs-CZ')}</p>` +
       `<p><a href="${eventsUrl}">${eventsUrl}</p>` +
       `<p>${JSON.stringify(this.deviceService.getDeviceInfo())}</p>`;

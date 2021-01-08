@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { EventLog, LoggingService } from 'src/app/logging.service';
+import { LoggingService } from 'src/app/logging.service';
+import { TitleService } from 'src/app/title.service';
+import { EventLogDataSource } from '../eventlog.datasource';
 
 @Component({
   selector: 'app-events',
@@ -10,19 +11,22 @@ import { EventLog, LoggingService } from 'src/app/logging.service';
 })
 export class EventsComponent implements OnInit {
 
-  $events?: Observable<EventLog[]>;
+  displayedColumns: string[] = ['timestamp', 'location', 'view', 'event', 'details'];
+
+  dataSource: EventLogDataSource;
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly loggingService: LoggingService) { }
+    private readonly titleService: TitleService,
+    loggingService: LoggingService) {
+    this.titleService.setTitle('Moje cesta Pekárnou');
+    this.dataSource = new EventLogDataSource(loggingService);
+  }
 
   ngOnInit(): void {
     console.log('Events', this.route.snapshot.params.sessionId);
 
-    this.$events = this.loggingService.getEvents(this.route.snapshot.params.sessionId);
-    this.$events.subscribe(events => {
-      console.log(events);
-    });
+    this.dataSource.loadEvents(this.route.snapshot.params.sessionId);
   }
 }
 

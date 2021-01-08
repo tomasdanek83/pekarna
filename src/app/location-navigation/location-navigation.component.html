@@ -3,7 +3,8 @@
     <mat-card-header>
       <mat-icon mat-card-avatar
                 color="accent">directions</mat-icon>
-      <mat-card-title>Další stanoviště</mat-card-title>
+      <mat-card-title *ngIf="!toFirst">Další stanoviště</mat-card-title>
+      <mat-card-title *ngIf="toFirst">První stanoviště</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <p>

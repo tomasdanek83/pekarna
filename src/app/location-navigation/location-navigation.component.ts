@@ -12,6 +12,7 @@ import { Locations } from '../model/locations';
 })
 export class LocationNavigationComponent implements OnInit {
 
+  toFirst = false;
   nextLocation?: Location;
 
   get encodedCoords(): string | null {
@@ -22,8 +23,9 @@ export class LocationNavigationComponent implements OnInit {
   constructor(
     private readonly locationService: LocationService,
     private readonly loggingService: LoggingService,
-    route: ActivatedRoute,) {
-    if (route.snapshot.data.toFirst) {
+    route: ActivatedRoute) {
+    this.toFirst = route.snapshot.data.toFirst;
+    if (this.toFirst) {
       this.nextLocation = this.locationService.getFirstLocation();
     } else {
       this.nextLocation = Locations.find(l => l.id === this.locationService?.location?.nextLocationId);

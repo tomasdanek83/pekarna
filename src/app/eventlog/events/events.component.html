@@ -1,1 +1,47 @@
-<p>events works!</p>
+<table mat-table
+       [dataSource]="dataSource">
+  <!-- Timestamp column -->
+  <ng-container matColumnDef="timestamp">
+    <th mat-header-cell
+        *matHeaderCellDef> Čas </th>
+    <td mat-cell
+        *matCellDef="let element"> {{element.timestamp | date: 'HH:mm' }} </td>
+  </ng-container>
+
+  <!-- Location Column -->
+  <ng-container matColumnDef="location">
+    <th mat-header-cell
+        *matHeaderCellDef> Stanoviště </th>
+    <td mat-cell
+        *matCellDef="let element"> {{element.location}} </td>
+  </ng-container>
+
+  <!-- View Column -->
+  <ng-container matColumnDef="view">
+    <th mat-header-cell
+        *matHeaderCellDef> Stránka </th>
+    <td mat-cell
+        *matCellDef="let element"> {{element.view}} </td>
+  </ng-container>
+
+  <!-- Event Column -->
+  <ng-container matColumnDef="event">
+    <th mat-header-cell
+        *matHeaderCellDef> Událost </th>
+    <td mat-cell
+        *matCellDef="let element"> {{element.event}} </td>
+  </ng-container>
+
+  <!-- Details Column -->
+  <ng-container matColumnDef="details">
+    <th mat-header-cell
+        *matHeaderCellDef> Podrobnosti </th>
+    <td mat-cell
+        *matCellDef="let element"> {{element.details}} </td>
+  </ng-container>
+
+  <tr mat-header-row
+      *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row
+      *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

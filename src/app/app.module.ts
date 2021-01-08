@@ -7,19 +7,21 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EventsComponent } from './eventlog/events/events.component';
 import { GameOverComponent } from './gameover/gameover.component';
 import { HelpComponent } from './help/help.component';
 import { LocationNavigationComponent } from './location-navigation/location-navigation.component';
 import { LocationQuizComponent } from './location-quiz/location-quiz.component';
 import { LocationTaskComponent } from './location-task/location-task.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { EventsComponent } from './eventlog/events/events.component';
 
 
 
@@ -46,7 +48,9 @@ import { EventsComponent } from './eventlog/events/events.component';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
   providers: [CookieService, Title],
   bootstrap: [AppComponent]
