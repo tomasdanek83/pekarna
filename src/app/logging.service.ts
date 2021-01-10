@@ -17,14 +17,16 @@ export class LoggingService {
 
   private static readonly cookieName = 'pekarna';
 
-  private readonly sessionId: string;
+  private sessionId?: string;
 
   constructor(
     private readonly http: HttpClient,
     private readonly locationService: LocationService,
     private readonly deviceService: DeviceDetectorService,
-    readonly cookieService: CookieService) {
-    const cookie: string = cookieService.get(LoggingService.cookieName);
+    private readonly cookieService: CookieService) { }
+
+  createOrUseSession(): void {
+    const cookie: string = this.cookieService.get(LoggingService.cookieName);
 
     if (cookie) {
       this.sessionId = cookie;
@@ -42,7 +44,7 @@ export class LoggingService {
   logEvent(view: LogView, event: LogEvent, details?: string): void {
 
     const eventLog: EventLog = {
-      SESSION_ID: this.sessionId,
+      SESSION_ID: this.sessionId ?? '',
       LOCATION_ID: this.locationService.location?.id ?? 'unknown',
       VIEW: view,
       EVENT: event,

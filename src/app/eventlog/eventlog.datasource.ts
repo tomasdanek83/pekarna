@@ -32,7 +32,6 @@ export class EventLogDataSource implements DataSource<EventLogUi> {
       map(events => {
         return events.map(e => EventLogMapper.mapEventLog(e));
       }),
-      delay(10000),
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false))
     ).subscribe(events => this.eventsSubject.next(events));

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LocationService } from './location.service';
+import { LoggingService } from './logging.service';
 import { Location } from './model/location.model';
 import { Locations } from './model/locations';
 import { TitleService } from './title.service';
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly locationService: LocationService,
+    private readonly loggingService: LoggingService,
     private readonly titleService: TitleService) {
     this.title$ = this.titleService.title$;
     this.location$ = this.locationService.location$;
@@ -38,6 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (location) {
           this.locationService.setLocation(location);
+          this.loggingService.createOrUseSession();
 
           this.titleService.setTitle(this.getLocationTitle(location));
 
