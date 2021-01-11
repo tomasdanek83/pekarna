@@ -2,22 +2,40 @@
   <mat-card-header>
     <mat-icon mat-card-avatar
               color="accent">help</mat-icon>
-    <mat-card-title>Pekárna žije!</mat-card-title>
+    <mat-card-title>O aplikaci Pekárna žije!</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <p>Vítejte, objevili jste jedno ze {{totalLocations}} stanovišť naší lesní hry.</p>
-    <p>Pokud si chcete zahrát, máte nyní 2 možnosti:</p>
-    <ul>
-      <li>Začít na tomto stanovišti ({{location?.name}}), které je {{location?.index}}. ze {{totalLocations}} a poté přejít z
-        posledního stanoviště na první (je to kousek) a hru dokončit</li>
-      <li>Přejít na první stanoviště a hrát od začátku</li>
-    </ul>
-    <p>Hra vám zabere 1,5 - 2 hodiny. Nejvíc si ji
-      užijete ve 3 a více lidech.</p>
-    <p>Ke hře je potřeba nabitý chytrý telefon s přístupem k internetu a GPS.</p>
-    <p>Pokud najdete nějakou nesrovnalost, např. nefunkční QR kódy nebo chybějící stanoviště, napište prosím na <a
-         href="mailto:tomasdanek83@gmail.com">tomasdanek83@gmail.com</a></p>
-    <p>Aplikace ukládá cookie s názvem "pekarna" po dobu 6-ti hodin pro trasování vaší cesty mezi stanovištěmi.</p>
+    <div class="help-line">
+      <mat-icon>directions</mat-icon>
+      <div>
+        <p>Pokud si chcete zahrát, máte nyní 2 možnosti:</p>
+        <ul>
+          <li>Začít na tomto stanovišti ({{location?.name}}), které je {{location?.index}}. ze {{totalLocations}} a poté přejít z
+            posledního stanoviště na první (je to kousek) a hru dokončit</li>
+          <li>Přejít na první stanoviště a hrát od začátku</li>
+        </ul>
+      </div>
+    </div>
+    <div class="help-line">
+      <mat-icon>timer</mat-icon>
+      Hra vám zabere 1,5 - 2 hodiny. Nejvíc si ji užijete ve 3 a více lidech.
+    </div>
+    <div class="help-line">
+      <mat-icon>phonelink_setup</mat-icon>
+      Ke hře je potřeba nabitý chytrý telefon s přístupem k internetu a GPS.
+    </div>
+    <div class="help-line">
+      <mat-icon>feedback</mat-icon>
+      <div>
+        Pokud najdete nějakou nesrovnalost, např. nefunkční QR kódy nebo chybějící stanoviště, napište prosím na
+        <a href="mailto:tomasdanek83@gmail.com">tomasdanek83@gmail.com</a>
+      </div>
+    </div>
+    <div class="help-line">
+      <mat-icon>security</mat-icon>
+      Aplikace ukládá cookie s názvem "pekarna" po dobu 6-ti hodin pro trasování vaší cesty mezi stanovištěmi.
+    </div>
     <p>Lenka a Tomáš Daňkovi</p>
   </mat-card-content>
   <mat-card-actions>

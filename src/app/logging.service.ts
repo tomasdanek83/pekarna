@@ -17,7 +17,7 @@ export class LoggingService {
 
   private static readonly cookieName = 'pekarna';
 
-  private sessionId?: string;
+  sessionId?: string;
 
   constructor(
     private readonly http: HttpClient,

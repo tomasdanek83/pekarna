@@ -1,9 +1,9 @@
 import { CollectionViewer } from '@angular/cdk/collections';
 import { DataSource } from '@angular/cdk/table';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, delay, finalize, map } from 'rxjs/operators';
+import { catchError, finalize, map } from 'rxjs/operators';
 import { LoggingService } from '../logging.service';
-import { EventLogUi } from '../model/eventlog.model';
+import { EventLog, EventLogUi } from '../model/eventlog.model';
 import { EventLogMapper } from './eventlog.mapper';
 
 export class EventLogDataSource implements DataSource<EventLogUi> {
@@ -24,16 +24,22 @@ export class EventLogDataSource implements DataSource<EventLogUi> {
     this.loadingSubject.complete();
   }
 
-  loadEvents(sessionId: string): void {
+  loadEvents(sessionId: string, isAdmin = false): void {
 
     this.loadingSubject.next(true);
 
     this.loggingService.getEvents(sessionId).pipe(
       map(events => {
-        return events.map(e => EventLogMapper.mapEventLog(e));
+        return events
+          .filter(e => isAdmin ? true : !this.isEventLogHiddenForUser(e))
+          .map(e => EventLogMapper.mapEventLog(e));
       }),
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false))
     ).subscribe(events => this.eventsSubject.next(events));
+  }
+
+  private isEventLogHiddenForUser(eventLog: EventLog): boolean {
+    return eventLog.VIEW !== 'Quiz' && eventLog.VIEW !== 'Task';
   }
 }

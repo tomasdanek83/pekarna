@@ -61,8 +61,16 @@ export class AppComponent implements OnInit, OnDestroy {
     return `${location.name} (${location.index}/${this.totalLocations})`;
   }
 
+  onHomeClick(): void {
+    this.router.navigate(['/quiz']);
+  }
+
   onHelpClick(): void {
     this.router.navigate(['']);
+  }
+
+  onAccountClick(): void {
+    this.router.navigate(['/events']);
   }
 
   ngOnDestroy(): void {

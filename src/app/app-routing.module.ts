@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'nav-first', component: LocationNavigationComponent, data: { toFirst: true } },
   { path: 'gameover', component: GameOverComponent },
   { path: 'events/:sessionId', component: EventsComponent },
+  { path: 'events', component: EventsComponent },
   { path: '', component: HelpComponent }
 ];
 

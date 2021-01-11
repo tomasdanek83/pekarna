@@ -16,8 +16,8 @@ export interface EventLogUi {
   id?: number;
   sessionId: string;
   location: string;
-  view: LogView;
-  event: LogEvent;
+  view: string;
+  event: string;
   details: string | null;
   userAgent: string;
   timestamp?: string;

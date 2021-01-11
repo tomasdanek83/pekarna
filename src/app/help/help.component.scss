@@ -3,3 +3,14 @@ mat-card-header {
         font-size: 2rem;
     }
 }
+
+.help-line {
+  display: flex;
+  align-items: top;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  
+  .mat-icon {
+    margin-right: 1rem;
+  }
+}

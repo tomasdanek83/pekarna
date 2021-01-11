@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoggingService } from 'src/app/logging.service';
-import { TitleService } from 'src/app/title.service';
 import { EventLogDataSource } from '../eventlog.datasource';
 
 @Component({
@@ -17,16 +16,16 @@ export class EventsComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly titleService: TitleService,
-    loggingService: LoggingService) {
-    this.titleService.setTitle('Moje cesta Pekárnou');
+    private readonly loggingService: LoggingService) {
     this.dataSource = new EventLogDataSource(loggingService);
   }
 
   ngOnInit(): void {
-    console.log('Events', this.route.snapshot.params.sessionId);
+    const sessionId = this.route.snapshot.params.sessionId;
 
-    this.dataSource.loadEvents(this.route.snapshot.params.sessionId);
+    console.log('Events route sessionId', sessionId);
+
+    this.dataSource.loadEvents(sessionId ?? this.loggingService.sessionId, Boolean(sessionId));
   }
 }
 
