@@ -1,5 +1,9 @@
-table {
-  width: 100%;
+mat-card-header {
+  align-items: center;
+  
+  mat-icon {
+      font-size: 2rem;
+  }
 }
 
 @media screen and (max-width: 960px) {

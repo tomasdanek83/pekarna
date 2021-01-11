@@ -1,5 +1,7 @@
-mat-card-header {
-    mat-icon {
-        font-size: 2rem;
-    }
+.mat-card-header {
+  align-items: center;
+
+  .mat-icon {
+    font-size: 2rem;
+  }
 }
