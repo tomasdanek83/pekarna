@@ -48,8 +48,12 @@ export class LocationQuizComponent implements OnInit {
     this.router.navigate(['/task']);
   }
 
-  onAnswerEntered(): void {
+  onSubmit(): void {
     const answer = this.answerControl.value;
+
+    if (!answer) {
+      return;
+    }
 
     if (this.isAnswerCorrect(answer)) {
       this.onCorrectAnswer(answer);
